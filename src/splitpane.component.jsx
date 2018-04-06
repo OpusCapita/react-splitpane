@@ -33,11 +33,6 @@ export default class SplitPane extends React.Component {
     onDragFinished: () => {},
   }
 
-  constructor(props) {
-    super(props);
-    this.defaultSize = getSize(props);
-  }
-
   fireResizeEvent = () => {
     if (document.createEvent) {
       const evt = document.createEvent('HTMLEvents');
@@ -64,7 +59,7 @@ export default class SplitPane extends React.Component {
     return (
       <ReactSplitPane
         {...otherProps}
-        defaultSize={this.defaultSize}
+        defaultSize={getSize(this.props)}
         onDragFinished={this.handleDragFinished}
       >
         { children }
