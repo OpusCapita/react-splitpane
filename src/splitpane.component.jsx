@@ -33,6 +33,10 @@ export default class SplitPane extends React.Component {
     onDragFinished: () => {},
   }
 
+  componentDidUpdate = () => {
+    this.fireResizeEvent();
+  }
+
   fireResizeEvent = () => {
     if (document.createEvent) {
       const evt = document.createEvent('HTMLEvents');
