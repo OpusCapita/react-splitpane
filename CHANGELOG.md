@@ -3,6 +3,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 1.0.2
 * Fix: when content is changed, it is also resized to fit into the available space
 
 ## 1.0.1
