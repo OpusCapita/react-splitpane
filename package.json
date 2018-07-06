@@ -37,6 +37,9 @@
     "react-dom": "15 || 16"
   },
   "devDependencies": {
+    "@storybook/addon-options": "3.4.7",
+    "@storybook/addon-knobs": "3.4.7",
+    "@storybook/react": "3.4.7",
     "autoprefixer": "8.1.0",
     "babel-cli": "6.26.0",
     "babel-eslint": "8.2.2",
