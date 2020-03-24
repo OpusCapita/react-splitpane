@@ -46,11 +46,11 @@ export default class SplitPane extends React.Component {
   };
 
   handleDragFinished = (size) => {
-    const { id, rememberSize } = this.props;
+    const { id, rememberSize, onDragFinished } = this.props;
     if (rememberSize) {
       setSize(id, size);
     }
-    this.props.onDragFinished(size);
+    onDragFinished(size);
     this.fireResizeEvent();
   };
 

@@ -1,12 +1,12 @@
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const WebpackNotifierPlugin = require('webpack-notifier');
 const autoprefixer = require('autoprefixer');
 const precss = require('precss');
 const flexbugs = require('postcss-flexbugs-fixes');
+const packageConfig = require('./package.json');
 
-const libraryName = 'react-splitpane';
+const libraryName = packageConfig.name.replace('@opuscapita/', '');
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -43,21 +43,16 @@ const baseConfig = {
         ],
       },
       {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: () => [flexbugs, precss, autoprefixer],
-              minimize: !!isProd,
-            },
-          },
-        ],
+        test: /\.svg$/,
+        use: [{
+          loader: 'babel-loader',
+        },
+        {
+          loader: 'react-svg-loader',
+        }],
       },
       {
-        test: /\.scss$/,
+        test: /\.(sa|sc|c)ss$/,
         use: [
           'style-loader',
           'css-loader',
@@ -65,36 +60,18 @@ const baseConfig = {
             loader: 'postcss-loader',
             options: {
               plugins: () => [flexbugs, precss, autoprefixer],
-              minimize: !!isProd,
             },
           },
           'sass-loader',
         ],
       },
       {
-        test: /\.svg$/,
-        exclude: path.resolve(__dirname, 'node_modules', 'font-awesome'),
-        use: ['babel-loader', 'react-svg-loader'],
-      },
-      {
-        test: /\.svg$/,
-        include: path.resolve(__dirname, 'node_modules', 'font-awesome'),
+        test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
         use: [{
           loader: 'file-loader',
           options: {
             name: '[name].[ext]',
             outputPath: 'fonts/',
-          },
-        }],
-      },
-      {
-        test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
-        use: [{
-          loader: 'url-loader',
-          options: {
-            name: '[name].[ext]',
-            outputPath: 'fonts/',
-            limit: 100,
             mimetype: 'application/font-woff',
           },
         }],
@@ -102,11 +79,10 @@ const baseConfig = {
       {
         test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
         use: [{
-          loader: 'url-loader',
+          loader: 'file-loader',
           options: {
             name: '[name].[ext]',
             outputPath: 'fonts/',
-            limit: 100,
             mimetype: 'application/octet-stream',
           },
         }],
@@ -145,6 +121,13 @@ const baseConfig = {
   },
   // Add your peer dependencies here to avoid bundling them to build
   externals: {
+    'prop-types': {
+      root: 'PropTypes',
+      commonjs2: 'prop-types',
+      commonjs: 'prop-types',
+      amd: 'prop-types',
+      umd: 'prop-types',
+    },
     react: {
       root: 'React',
       commonjs2: 'react',
@@ -159,6 +142,13 @@ const baseConfig = {
       amd: 'react-dom',
       umd: 'react-dom',
     },
+    'styled-components': {
+      root: 'styled-components',
+      commonjs2: 'styled-components',
+      commonjs: 'styled-components',
+      amd: 'styled-components',
+      umd: 'styled-components',
+    },
   },
 };
 
@@ -166,6 +156,7 @@ const baseConfig = {
 * DEVELOPMENT CONFIG
 */
 const devConfig = {
+  mode: 'development',
   devtool: 'eval-source-map',
   plugins: [
     new webpack.DefinePlugin({
@@ -173,8 +164,6 @@ const devConfig = {
         NODE_ENV: JSON.stringify('development'),
       },
     }),
-    new WebpackNotifierPlugin(),
-    new webpack.NamedModulesPlugin(),
   ],
 };
 
@@ -182,18 +171,12 @@ const devConfig = {
 * PRODUCTION CONFIG
 */
 const prodConfig = {
-  devtool: 'source-map',
+  mode: 'production',
+  devtool: false,
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
-      },
-    }),
-    new webpack.optimize.ModuleConcatenationPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      output: {
-        comments: false,
       },
     }),
   ],

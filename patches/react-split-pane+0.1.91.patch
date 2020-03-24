@@ -1,0 +1,45 @@
+diff --git a/node_modules/react-split-pane/dist/index.esm.js b/node_modules/react-split-pane/dist/index.esm.js
+index 2852403..19a5c49 100644
+--- a/node_modules/react-split-pane/dist/index.esm.js
++++ b/node_modules/react-split-pane/dist/index.esm.js
+@@ -139,6 +139,7 @@ var Pane = /*#__PURE__*/function (_React$PureComponent) {
+           split = _this$props.split,
+           styleProps = _this$props.style,
+           size = _this$props.size,
++          size2 = _this$props.size2,
+           eleRef = _this$props.eleRef;
+       var classes = ['Pane', split, className];
+       var style = {
+@@ -156,6 +157,8 @@ var Pane = /*#__PURE__*/function (_React$PureComponent) {
+         }
+ 
+         style.flex = 'none';
++      } else if (split !== 'vertical' && !isNaN(size2)) {
++        style.height = 'calc(100% - ' + size2 + 'px)';
+       }
+ 
+       style = Object.assign({}, style, styleProps || {});
+@@ -174,6 +177,7 @@ Pane.propTypes = {
+   className: PropTypes.string.isRequired,
+   children: PropTypes.node.isRequired,
+   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
++  size2: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+   split: PropTypes.oneOf(['vertical', 'horizontal']),
+   style: stylePropType,
+   eleRef: PropTypes.func
+@@ -565,6 +569,7 @@ var SplitPane = /*#__PURE__*/function (_React$Component) {
+           _this2.pane1 = node;
+         },
+         size: pane1Size,
++        size2: pane2Size,
+         split: split,
+         style: pane1Style
+       }, notNullChildren[0]), React.createElement(Resizer, {
+@@ -585,6 +590,7 @@ var SplitPane = /*#__PURE__*/function (_React$Component) {
+           _this2.pane2 = node;
+         },
+         size: pane2Size,
++        size2: pane1Size,
+         split: split,
+         style: pane2Style
+       }, notNullChildren[1]));

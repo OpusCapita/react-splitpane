@@ -1,5 +1,19 @@
 import React from 'react';
+import styled from 'styled-components';
+import faker from 'faker';
 import SplitPane from '../../src/index';
+
+const PaneContainer = styled.div`
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 0%;
+  min-width: 0%;
+  overflow: auto;
+  height: 100%;
+  padding: 10px;
+  background-color: white;
+  box-sizing: border-box;
+`;
 
 export default class ComponentView extends React.PureComponent {
   constructor(props) {
@@ -10,10 +24,16 @@ export default class ComponentView extends React.PureComponent {
   render() {
     return (
       <SplitPane id="myVerticalPane">
-        <div><span>Pane1</span></div>
+        <PaneContainer>
+          {faker.lorem.paragraph(100)}
+        </PaneContainer>
         <SplitPane id="myHorizontalPane" split="horizontal">
-          <div><span>Pane2</span></div>
-          <div><span>Pane3</span></div>
+          <PaneContainer>
+            {faker.lorem.paragraph(100)}
+          </PaneContainer>
+          <PaneContainer>
+            {faker.lorem.paragraph(100)}
+          </PaneContainer>
         </SplitPane>
       </SplitPane>
     );

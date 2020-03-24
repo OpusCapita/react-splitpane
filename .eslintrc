@@ -35,6 +35,8 @@
       "devDependencies": true,
       "optionalDependencies": true,
       "peerDependencies": true}],
-    "react/prefer-stateless-function": "off"
+    "react/prefer-stateless-function": "off",
+    "react/static-property-placement": "off",
+    "react/jsx-props-no-spreading": "off"
   }
 }
