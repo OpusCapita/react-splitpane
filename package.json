@@ -29,7 +29,8 @@
     "postinstall": "patch-package"
   },
   "files": [
-    "/lib/"
+    "/lib/",
+    "/patches"
   ],
   "engines": {
     "node": ">=6.10.0",
