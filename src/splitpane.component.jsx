@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactSplitPane from 'react-split-pane';
+import ReactSplitPane from '../react-split-pane-patched/index.esm';
 import './splitpane.component.scss';
 
 const getSize = (props) => {

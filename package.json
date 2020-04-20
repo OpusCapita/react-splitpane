@@ -25,19 +25,16 @@
     "test": "cross-env NODE_ENV=production BUILD_ENV=test mocha",
     "preversion": "npm run lint && npm test",
     "version": "npm run build && git add -A lib docs",
-    "postversion": "git push && git push --tags",
-    "postinstall": "patch-package"
+    "postversion": "git push && git push --tags"
   },
   "files": [
-    "/lib/",
-    "/patches"
+    "/lib/"
   ],
   "engines": {
     "node": ">=6.10.0",
     "npm": ">=5.4.0"
   },
   "peerDependencies": {
-    "patch-package": "6",
     "prop-types": "15",
     "react": "16",
     "react-dom": "16"
@@ -60,7 +57,6 @@
     "babel-loader": "8.1.0",
     "babel-plugin-dynamic-import-node": "2.3.0",
     "babel-plugin-transform-react-remove-prop-types": "0.4.24",
-    "patch-package": "6.2.2",
     "bootstrap-sass": "3.4.1",
     "chai": "4.2.0",
     "chai-immutable": "2.1.0",
@@ -113,7 +109,8 @@
     "write-file-webpack-plugin": "4.5.1"
   },
   "dependencies": {
-    "react-split-pane": "0.1.91"
+    "react-lifecycles-compat": "3.0.4",
+    "react-style-proptype": "3.2.2"
   },
   "repository": {
     "type": "git",
